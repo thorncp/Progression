@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Progression", "Progression\Progression.csproj", "{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProgression", "TestProgression\TestProgression.csproj", "{54C65173-F47E-4DA7-8470-D50F5BF22E66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54C65173-F47E-4DA7-8470-D50F5BF22E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C65173-F47E-4DA7-8470-D50F5BF22E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C65173-F47E-4DA7-8470-D50F5BF22E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C65173-F47E-4DA7-8470-D50F5BF22E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Progression\Progression.csproj
+	EndGlobalSection
+EndGlobal
