@@ -5,7 +5,7 @@ namespace Progression
 {
     public class ProgressBar
     {
-        public ProgressBar(int total,string title = null)
+        public ProgressBar(int total,string title)
         {
             Total = total;
             Title = title;
