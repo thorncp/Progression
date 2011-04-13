@@ -5,10 +5,11 @@ namespace Progression
 {
     public class ProgressBar
     {
-        public ProgressBar(int total, string title)
+        public ProgressBar(int total, string title, int width = 30)
         {
             Total = total;
             Title = title;
+            Width = Width;
         }
 
         public int Total { get; set; }
