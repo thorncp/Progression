@@ -24,6 +24,10 @@ namespace Progression
             get { return Math.Round((double)Status / Total, 2, MidpointRounding.AwayFromZero); }
         }
 
+        public bool IsRunning {
+            get { return Status < Total; }
+        }
+
         public void Bump()
         {
             UpdateStatus(Status + 1);

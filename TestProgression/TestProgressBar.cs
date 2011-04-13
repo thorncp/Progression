@@ -71,6 +71,19 @@ namespace TestProgression
         }
 
         [Test]
+        public void TestIsRunningIsTrueWhenStatusIsLessThanTotal()
+        {
+            Assert.IsTrue(progressBar.IsRunning);
+        }
+
+        [Test]
+        public void TestIsRunningIsFalseWhenStatusIsEqualToTotal()
+        {
+            progressBar.UpdateStatus(100);
+            Assert.IsFalse(progressBar.IsRunning);
+        }
+
+        [Test]
         public void TestGeneratedStatusStringUsesProgessBarWidth()
         {
             progressBar.Width = 30;
