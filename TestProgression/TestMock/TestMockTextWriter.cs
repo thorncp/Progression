@@ -26,6 +26,15 @@ namespace TestProgression.TestMock
             buffer.Write("\rHi");
             Assert.AreEqual("Hi Dawg", buffer.Text);
         }
+
+        [Test]
+        public void TestWriteDoesNotResetTheCursorWhenTextStartsWithCarriageReturnLineFeed()
+        {
+            var buffer = new MockTextWriter();
+            buffer.Write("Yo Dawg");
+            buffer.Write("\r\nHi");
+            Assert.AreEqual("Yo Dawg\r\nHi", buffer.Text);
+        }
     }
 }
 
