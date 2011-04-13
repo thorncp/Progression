@@ -20,6 +20,20 @@ namespace TestProgression
             var progressBar = new ProgressBar (100);
             Assert.AreEqual (0, progressBar.Status);
         }
+
+        [Test]
+        public void TestNewProgressBarWithTitleShouldRetainTitle()
+        {
+            var progressBar = new ProgressBar (100, "Yo Dawg");
+            Assert.AreEqual ("Yo Dawg", progressBar.Title);
+        }
+
+        [Test]
+        public void TestNewProgressBarWithoutTitleShouldHaveNullTitle()
+        {
+            var progressBar = new ProgressBar (100);
+            Assert.IsNull(progressBar.Title);
+        }
     }
 }
 
