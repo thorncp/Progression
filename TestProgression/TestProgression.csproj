@@ -36,6 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestProgressBar.cs" />
+    <Compile Include="Mock\MockTextWriter.cs" />
+    <Compile Include="TestMock\TestMockTextWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -43,5 +45,9 @@
       <Project>{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}</Project>
       <Name>Progression</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mock\" />
+    <Folder Include="TestMock\" />
   </ItemGroup>
 </Project>

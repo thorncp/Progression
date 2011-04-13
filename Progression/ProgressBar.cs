@@ -20,11 +20,13 @@ namespace Progression
 
         public int Width { get; set; }
 
-        public double PercentComplete {
+        public double PercentComplete
+        {
             get { return Math.Round((double)Status / Total, 2, MidpointRounding.AwayFromZero); }
         }
 
-        public bool IsRunning {
+        public bool IsRunning
+        {
             get { return Status < Total; }
         }
 
