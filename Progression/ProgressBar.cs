@@ -2,13 +2,16 @@ using System;
 
 namespace Progression
 {
-	public class ProgressBar
-	{
-		public ProgressBar()
-		{
-		}
-		
-		public int Status { get; set; }
-	}
+    public class ProgressBar
+    {
+        public ProgressBar (int total)
+        {
+            Total = total;
+        }
+
+        public int Total { get; set; }
+
+        public int Status { get; set; }
+    }
 }
 
