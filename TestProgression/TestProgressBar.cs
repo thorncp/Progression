@@ -131,7 +131,7 @@ namespace TestProgression
         }
 
         [Test]
-        public void TestWritingToConsoleDuringProgressBarWritreTheTextOverTheProgressBarAndMovesItToTheNextLine()
+        public void TestWritingToConsoleDuringProgressBarWritesTheTextOverTheProgressBarAndMovesItToTheNextLine()
         {
             Console.Out.WriteLine("Herp Derp");
             // todo: zomg, use a regex or something
