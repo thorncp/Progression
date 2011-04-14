@@ -32,8 +32,8 @@ namespace TestProgression.TestMock
         {
             var buffer = new MockTextWriter();
             buffer.Write("Yo Dawg");
-            buffer.Write("\r\nHi");
-            Assert.AreEqual("Yo Dawg\r\nHi", buffer.Text);
+            buffer.Write(Environment.NewLine + "Hi");
+            Assert.AreEqual("Yo Dawg" + Environment.NewLine + "Hi", buffer.Text);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace TestProgression.TestMock
             var buffer = new MockTextWriter();
             buffer.WriteLine("Yo Dawg");
             buffer.Write("\rHi");
-            Assert.AreEqual("Yo Dawg\nHi", buffer.Text);
+            Assert.AreEqual("Yo Dawg" + Environment.NewLine + "Hi", buffer.Text);
         }
     }
 }

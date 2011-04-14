@@ -26,8 +26,8 @@ namespace TestProgression
             if (carriageReturnPattern.IsMatch(text))
             {
                 text = text.Substring(1);
-                int lastLineIndex = Text.LastIndexOf("\n");
-                int startIndex = lastLineIndex < 0 ? 0 : lastLineIndex + 1;
+                int lastLineIndex = Text.LastIndexOf(Environment.NewLine);
+                int startIndex = lastLineIndex < 0 ? 0 : lastLineIndex + Environment.NewLine.Length;
                 output.Remove(startIndex, Math.Min(text.Length, output.Length - startIndex));
                 output.Insert(startIndex, text);
             }
