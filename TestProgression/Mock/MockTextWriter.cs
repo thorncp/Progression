@@ -25,7 +25,7 @@ namespace TestProgression
             if (carriageReturnPattern.IsMatch(text))
             {
                 text = text.Substring(1);
-                output.Remove(0, text.Length);
+                output.Remove(0, Math.Min(text.Length, output.Length));
                 output.Insert(0, text);
             }
             else

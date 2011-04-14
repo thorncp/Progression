@@ -117,6 +117,19 @@ namespace TestProgression
             progressBar.UpdateStatus(100);
             Assert.AreEqual("Yo Dawg [==============================] 100%", progressBar.GenerateStatusString());
         }
+
+        [Test]
+        public void TestTextInConsoleIsOverwrittenWhenStatusProgresses()
+        {
+            var output = new MockTextWriter();
+            progressBar = new ProgressBar(2, "Yo Dawg", 30, output);
+
+            Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
+
+            progressBar.Bump();
+
+            Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
+        }
     }
 }
 

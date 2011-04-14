@@ -1,15 +1,19 @@
 using System;
+using System.IO;
 using System.Text;
 
 namespace Progression
 {
     public class ProgressBar
     {
-        public ProgressBar(int total, string title, int width = 30)
+        public ProgressBar(int total, string title, int width = 30, TextWriter output = null)
         {
             Total = total;
             Title = title;
-            Width = Width;
+            Width = width;
+            Out = output ?? Console.Out;
+
+            PrintStatus();
         }
 
         public int Total { get; set; }
@@ -19,6 +23,8 @@ namespace Progression
         public string Title { get; set; }
 
         public int Width { get; set; }
+
+        public TextWriter Out { get; set; }
 
         public double PercentComplete
         {
@@ -38,6 +44,7 @@ namespace Progression
         public void UpdateStatus(int status)
         {
             Status = Math.Max(Math.Min(status, Total), 0);
+            PrintStatus();
         }
 
         public string GenerateStatusString()
@@ -48,6 +55,11 @@ namespace Progression
             string spaces = string.Empty.PadLeft(Width - ticksCompleted, ' ');
 
             return string.Format("{0} [{1}{2}] {3:0}%", Title, ticks, spaces, PercentComplete * 100);
+        }
+
+        private void PrintStatus()
+        {
+            Out.Write("\r" +  GenerateStatusString());
         }
     }
 }
