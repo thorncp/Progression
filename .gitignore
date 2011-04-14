@@ -3,3 +3,6 @@ obj
 test-results
 *.userprefs
 *.pidb
+*.ReSharper.user
+*.suo
+_ReSharper.*
