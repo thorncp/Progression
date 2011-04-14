@@ -6,12 +6,11 @@ namespace Progression
 {
     public class ProgressBar
     {
-        public ProgressBar(int total, string title, int width = 30, TextWriter output = null)
+        public ProgressBar(int total, string title, int width = 30)
         {
             Total = total;
             Title = title;
             Width = width;
-            Out = output ?? Console.Out;
 
             PrintStatus();
         }
@@ -23,8 +22,6 @@ namespace Progression
         public string Title { get; set; }
 
         public int Width { get; set; }
-
-        public TextWriter Out { get; set; }
 
         public double PercentComplete
         {
@@ -59,7 +56,7 @@ namespace Progression
 
         private void PrintStatus()
         {
-            Out.Write("\r" +  GenerateStatusString());
+            Console.Out.Write("\r" +  GenerateStatusString());
         }
     }
 }

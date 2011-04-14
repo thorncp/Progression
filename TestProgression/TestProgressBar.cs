@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using NUnit.Framework;
 using Progression;
@@ -14,7 +15,8 @@ namespace TestProgression
         public void Init()
         {
             output = new MockTextWriter();
-            progressBar = new ProgressBar(100, "Yo Dawg", 30, output);
+            Console.SetOut(output);
+            progressBar = new ProgressBar(100, "Yo Dawg", 30);
         }
 
         [Test]
