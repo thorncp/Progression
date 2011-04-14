@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Progression;
+using TestProgression;
 
 namespace Runner
 {
@@ -10,8 +11,9 @@ namespace Runner
         {
             var progressBar = new ProgressBar(100, "Herp Derp");
             for (int i = 0; i < 100; i++) {
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 progressBar.Bump();
+                Console.Out.WriteLine(i.ToString());
             }
         }
     }

@@ -119,7 +119,7 @@ namespace TestProgression
         }
 
         [Test]
-        public void TestUpdatingStatusOverwirteOldStatusInConsole()
+        public void TestUpdatingStatusOverwirtesOldStatusInConsole()
         {
             // this test is really covered by the previous two, as the status is dumped on progress
             // bar creation, so anything after that would have had to overwrite the old.
@@ -128,6 +128,14 @@ namespace TestProgression
             Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
             progressBar.UpdateStatus(50);
             Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
+        }
+
+        [Test]
+        public void TestWritingToConsoleDuringProgressBarWritreTheTextOverTheProgressBarAndMovesItToTheNextLine()
+        {
+            Console.Out.WriteLine("Herp Derp");
+            // todo: zomg, use a regex or something
+            Assert.AreEqual("                                           \rHerp Derp" + Environment.NewLine + "Yo Dawg [                              ] 0%", output.Text);
         }
     }
 }

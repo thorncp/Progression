@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,13 +26,20 @@ namespace TestProgression
             if (carriageReturnPattern.IsMatch(text))
             {
                 text = text.Substring(1);
-                output.Remove(0, Math.Min(text.Length, output.Length));
-                output.Insert(0, text);
+                int lastLineIndex = Text.LastIndexOf("\n");
+                int startIndex = lastLineIndex < 0 ? 0 : lastLineIndex + 1;
+                output.Remove(startIndex, Math.Min(text.Length, output.Length - startIndex));
+                output.Insert(startIndex, text);
             }
             else
             {
                 output.Append(text);
             }
+        }
+
+        public override void WriteLine(string value)
+        {
+            output.Append(value + Environment.NewLine);
         }
     }
 }

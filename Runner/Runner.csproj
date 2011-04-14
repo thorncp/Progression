@@ -42,5 +42,9 @@
       <Project>{CA22F5B3-DBAA-438F-A3FC-ABFE27649327}</Project>
       <Name>Progression</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestProgression\TestProgression.csproj">
+      <Project>{54C65173-F47E-4DA7-8470-D50F5BF22E66}</Project>
+      <Name>TestProgression</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

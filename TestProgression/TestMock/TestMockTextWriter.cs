@@ -35,6 +35,15 @@ namespace TestProgression.TestMock
             buffer.Write("\r\nHi");
             Assert.AreEqual("Yo Dawg\r\nHi", buffer.Text);
         }
+
+        [Test]
+        public void TestCarriageReturnDoesNotOverwriteNewlines()
+        {
+            var buffer = new MockTextWriter();
+            buffer.WriteLine("Yo Dawg");
+            buffer.Write("\rHi");
+            Assert.AreEqual("Yo Dawg\nHi", buffer.Text);
+        }
     }
 }
 

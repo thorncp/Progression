@@ -6,11 +6,19 @@ namespace Progression
 {
     public class ProgressBar
     {
+        private TextWriterWrapper outputWrapper;
+
         public ProgressBar(int total, string title, int width = 30)
         {
             Total = total;
             Title = title;
             Width = width;
+
+            outputWrapper = new TextWriterWrapper(Console.Out);
+            Console.SetOut(outputWrapper);
+
+            outputWrapper.PreWrite += ClearStatus;
+            outputWrapper.PostWrite += PrintStatus;
 
             PrintStatus();
         }
@@ -56,8 +64,13 @@ namespace Progression
 
         private void PrintStatus()
         {
-            Console.Out.Write("\r" +  GenerateStatusString());
+            outputWrapper.BypassWrite("\r" +  GenerateStatusString());
+        }
+
+        private void ClearStatus()
+        {
+            int size = GenerateStatusString().Length;
+            outputWrapper.BypassWrite("\r".PadRight(size + 1) + "\r");
         }
     }
 }
-
