@@ -8,6 +8,7 @@ namespace TestProgression
     public class MockTextWriter : TextWriter
     {
         private StringBuilder output = new StringBuilder();
+        private Regex carriageReturnPattern = new Regex(@"^\r(?!\n)");
 
         public override Encoding Encoding
         {
@@ -16,12 +17,12 @@ namespace TestProgression
 
         public string Text
         {
-            get { return output.ToString();}
+            get { return output.ToString(); }
         }
 
         public override void Write(string text)
         {
-            if (Regex.IsMatch(text, @"^\r(?!\n)"))
+            if (carriageReturnPattern.IsMatch(text))
             {
                 text = text.Substring(1);
                 output.Remove(0, text.Length);
