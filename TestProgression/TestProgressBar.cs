@@ -8,7 +8,6 @@ namespace TestProgression
     public class TestProgressBar
     {
         private ProgressBar progressBar;
-
         private MockTextWriter output;
 
         [SetUp]
@@ -115,6 +114,18 @@ namespace TestProgression
         {
             progressBar.UpdateStatus(100);
             Assert.AreEqual("Yo Dawg [==============================] 100%", output.Text);
+        }
+
+        [Test]
+        public void TestUpdatingStatusOverwirteOldStatusInConsole()
+        {
+            // this test is really covered by the previous two, as the status is dumped on progress
+            // bar creation, so anything after that would have had to overwrite the old.
+            // including it here as a seperate test for clarity.
+
+            Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
+            progressBar.UpdateStatus(50);
+            Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
         }
     }
 }
