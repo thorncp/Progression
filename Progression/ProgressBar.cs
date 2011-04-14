@@ -1,12 +1,10 @@
 using System;
-using System.IO;
-using System.Text;
 
 namespace Progression
 {
     public class ProgressBar
     {
-        private TextWriterWrapper outputWrapper;
+        private readonly ConsoleWrapper consoleWrapper;
 
         public ProgressBar(int total, string title, int width = 30)
         {
@@ -14,11 +12,11 @@ namespace Progression
             Title = title;
             Width = width;
 
-            outputWrapper = new TextWriterWrapper(Console.Out);
-            Console.SetOut(outputWrapper);
+            consoleWrapper = new ConsoleWrapper(Console.Out);
+            Console.SetOut(consoleWrapper);
 
-            outputWrapper.PreWrite += ClearStatus;
-            outputWrapper.PostWrite += PrintStatus;
+            consoleWrapper.PreWrite += ClearStatus;
+            consoleWrapper.PostWrite += PrintStatus;
 
             PrintStatus();
         }
@@ -64,13 +62,13 @@ namespace Progression
 
         private void PrintStatus()
         {
-            outputWrapper.BypassWrite("\r" +  GenerateStatusString());
+            consoleWrapper.BypassWrite("\r" +  GenerateStatusString());
         }
 
         private void ClearStatus()
         {
             int size = GenerateStatusString().Length;
-            outputWrapper.BypassWrite("\r".PadRight(size + 1) + "\r");
+            consoleWrapper.BypassWrite("\r".PadRight(size + 1) + "\r");
         }
     }
 }

@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TestProgression
+namespace TestProgression.Mock
 {
-    public class MockTextWriter : TextWriter
+    public class MockConsole : TextWriter
     {
-        private StringBuilder output = new StringBuilder();
-        private Regex carriageReturnPattern = new Regex(@"^\r(?!\n)");
+        private readonly StringBuilder output = new StringBuilder();
+        private readonly Regex carriageReturnPattern = new Regex(@"^\r(?!\n)");
 
         public override Encoding Encoding
         {

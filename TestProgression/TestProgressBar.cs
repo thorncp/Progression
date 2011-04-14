@@ -1,7 +1,8 @@
 using System;
-using System.IO;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Progression;
+using TestProgression.Mock;
 
 namespace TestProgression
 {
@@ -9,13 +10,13 @@ namespace TestProgression
     public class TestProgressBar
     {
         private ProgressBar progressBar;
-        private MockTextWriter output;
+        private MockConsole console;
 
         [SetUp]
         public void Init()
         {
-            output = new MockTextWriter();
-            Console.SetOut(output);
+            console = new MockConsole();
+            Console.SetOut(console);
             progressBar = new ProgressBar(100, "Yo Dawg", 30);
         }
 
@@ -90,7 +91,7 @@ namespace TestProgression
         [Test]
         public void TestGeneratedStatusStringUsesProgessBarWidth()
         {
-            string statusString = output.Text;
+            string statusString = console.Text;
             int leftBracket = statusString.IndexOf('[');
             int rightBracket = statusString.IndexOf(']');
 
@@ -101,21 +102,21 @@ namespace TestProgression
         [Test]
         public void TestZeroStatusGeneratesStatusStringRepresentingZeroState()
         {
-            Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
+            Assert.AreEqual("Yo Dawg [                              ] 0%", console.Text);
         }
 
         [Test]
         public void TestHalfStatusGeneratesStatusStringRepresentingHalfState()
         {
             progressBar.UpdateStatus(50);
-            Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
+            Assert.AreEqual("Yo Dawg [===============               ] 50%", console.Text);
         }
 
         [Test]
         public void TestFullStatusGeneratesStatusStringRepresentingCompletedState()
         {
             progressBar.UpdateStatus(100);
-            Assert.AreEqual("Yo Dawg [==============================] 100%", output.Text);
+            Assert.AreEqual("Yo Dawg [==============================] 100%", console.Text);
         }
 
         [Test]
@@ -125,17 +126,23 @@ namespace TestProgression
             // bar creation, so anything after that would have had to overwrite the old.
             // including it here as a seperate test for clarity.
 
-            Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
+            Assert.AreEqual("Yo Dawg [                              ] 0%", console.Text);
             progressBar.UpdateStatus(50);
-            Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
+            Assert.AreEqual("Yo Dawg [===============               ] 50%", console.Text);
         }
 
         [Test]
         public void TestWritingToConsoleDuringProgressBarWritesTheTextOverTheProgressBarAndMovesItToTheNextLine()
         {
             Console.Out.WriteLine("Herp Derp");
-            // todo: zomg, use a regex or something
-            Assert.AreEqual("                                           \rHerp Derp" + Environment.NewLine + "Yo Dawg [                              ] 0%", output.Text);
+
+            string[] lines = console.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            // the spaces make up the length of the progress was overwritten.
+            // the \r will of course print the text on top of these spaces in the console
+            Assert.AreEqual("                                           \rHerp Derp", lines[0]);
+
+            Assert.AreEqual("Yo Dawg [                              ] 0%", lines[1]);
         }
     }
 }

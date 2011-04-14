@@ -3,11 +3,11 @@ using System.IO;
 
 namespace Progression
 {
-    public class TextWriterWrapper : TextWriter
+    public class ConsoleWrapper : TextWriter
     {
-        private TextWriter textWriter;
+        private readonly TextWriter textWriter;
 
-        public TextWriterWrapper(TextWriter textWriter)
+        public ConsoleWrapper(TextWriter textWriter)
         {
             this.textWriter = textWriter;
         }

@@ -43,8 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestProgressBar.cs" />
-    <Compile Include="Mock\MockTextWriter.cs" />
-    <Compile Include="TestMock\TestMockTextWriter.cs" />
+    <Compile Include="Mock\MockConsole.cs" />
+    <Compile Include="TestMock\TestMockConsole.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

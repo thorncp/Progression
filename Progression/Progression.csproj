@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ProgressBar.cs" />
-    <Compile Include="TextWriterWrapper.cs" />
+    <Compile Include="ConsoleWrapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
