@@ -47,7 +47,7 @@ namespace Progression
             PrintStatus();
         }
 
-        public string GenerateStatusString()
+        private string GenerateStatusString()
         {
             int ticksCompleted = (int)(PercentComplete * Width);
 

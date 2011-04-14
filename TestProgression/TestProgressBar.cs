@@ -1,4 +1,5 @@
-    using NUnit.Framework;
+using System.IO;
+using NUnit.Framework;
 using Progression;
 
 namespace TestProgression
@@ -8,10 +9,13 @@ namespace TestProgression
     {
         private ProgressBar progressBar;
 
+        private MockTextWriter output;
+
         [SetUp]
         public void Init()
         {
-            progressBar = new ProgressBar(100, "Yo Dawg");
+            output = new MockTextWriter();
+            progressBar = new ProgressBar(100, "Yo Dawg", 30, output);
         }
 
         [Test]
@@ -85,9 +89,7 @@ namespace TestProgression
         [Test]
         public void TestGeneratedStatusStringUsesProgessBarWidth()
         {
-            progressBar.Width = 30;
-
-            string statusString = progressBar.GenerateStatusString();
+            string statusString = output.Text;
             int leftBracket = statusString.IndexOf('[');
             int rightBracket = statusString.IndexOf(']');
 
@@ -98,37 +100,21 @@ namespace TestProgression
         [Test]
         public void TestZeroStatusGeneratesStatusStringRepresentingZeroState()
         {
-            progressBar.Width = 30;
-            Assert.AreEqual("Yo Dawg [                              ] 0%", progressBar.GenerateStatusString());
+            Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
         }
 
         [Test]
         public void TestHalfStatusGeneratesStatusStringRepresentingHalfState()
         {
-            progressBar.Width = 30;
             progressBar.UpdateStatus(50);
-            Assert.AreEqual("Yo Dawg [===============               ] 50%", progressBar.GenerateStatusString());
+            Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
         }
 
         [Test]
         public void TestFullStatusGeneratesStatusStringRepresentingCompletedState()
         {
-            progressBar.Width = 30;
             progressBar.UpdateStatus(100);
-            Assert.AreEqual("Yo Dawg [==============================] 100%", progressBar.GenerateStatusString());
-        }
-
-        [Test]
-        public void TestTextInConsoleIsOverwrittenWhenStatusProgresses()
-        {
-            var output = new MockTextWriter();
-            progressBar = new ProgressBar(2, "Yo Dawg", 30, output);
-
-            Assert.AreEqual("Yo Dawg [                              ] 0%", output.Text);
-
-            progressBar.Bump();
-
-            Assert.AreEqual("Yo Dawg [===============               ] 50%", output.Text);
+            Assert.AreEqual("Yo Dawg [==============================] 100%", output.Text);
         }
     }
 }
