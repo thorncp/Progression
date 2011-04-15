@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Progression
 {
@@ -62,13 +64,24 @@ namespace Progression
 
         private void PrintStatus()
         {
-            consoleWrapper.BypassWrite("\r" +  GenerateStatusString());
+            consoleWrapper.BypassWrite("\r" + GenerateStatusString());
         }
 
         private void ClearStatus()
         {
             int size = GenerateStatusString().Length;
             consoleWrapper.BypassWrite("\r".PadRight(size + 1) + "\r");
+        }
+
+        public static void For<T>(IEnumerable<T> elements, string title, Action<T> action)
+        {
+            var progressBar = new ProgressBar(elements.Count(), title);
+
+            foreach (T element in elements)
+            {
+                action(element);
+                progressBar.Bump();
+            }
         }
     }
 }

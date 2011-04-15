@@ -140,9 +140,19 @@ namespace TestProgression
 
             // the spaces make up the length of the progress was overwritten.
             // the \r will of course print the text on top of these spaces in the console
-            Assert.AreEqual("                                           \rHerp Derp", lines[0]);
+            Assert.AreEqual("                                           \rHerp Derp", lines [0]);
 
-            Assert.AreEqual("Yo Dawg [                              ] 0%", lines[1]);
+            Assert.AreEqual("Yo Dawg [                              ] 0%", lines [1]);
+        }
+
+        [Test]
+        public void TestForYieldsEachElement()
+        {
+            var array = new[] { 1,2,3,4,5 };
+            int index = 0;
+            ProgressBar.For(array, "Yo Dawg", element => {
+                Assert.AreEqual(array[index++], element);
+            });
         }
     }
 }
