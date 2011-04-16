@@ -31,10 +31,7 @@ namespace Progression
 
         public int Width { get; set; }
 
-        public double PercentComplete
-        {
-            get { return Math.Round((double)Status / Total, 2, MidpointRounding.AwayFromZero); }
-        }
+        public double PercentComplete { get; private set; }
 
         public bool IsRunning
         {
@@ -49,7 +46,13 @@ namespace Progression
         public void UpdateStatus(int status)
         {
             Status = Math.Max(Math.Min(status, Total), 0);
-            PrintStatus();
+            double previousPercentComplete = PercentComplete;
+            PercentComplete = Math.Round((double)Status / Total, 2, MidpointRounding.AwayFromZero);
+
+            // long running progress bars exhibit a flickering behaviour when printed to the console
+            // on every cycle. to avoid that, we only print when there is a change significant enough
+            // to change text that will be printed.
+            if (PercentComplete > previousPercentComplete) PrintStatus();
         }
 
         private string GenerateStatusString()

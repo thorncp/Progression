@@ -8,11 +8,10 @@ namespace Runner
     {
         public static void Main(string[] args)
         {
-            var progressBar = new ProgressBar(100, "Herp Derp");
-            for (int i = 0; i < 100; i++) {
-                Thread.Sleep(50);
+            var progressBar = new ProgressBar(50000, "Herp Derp");
+            for (int i = 0; i < 50000; i++) {
+                Thread.Sleep(1);
                 progressBar.Bump();
-                Console.Out.WriteLine(i.ToString());
             }
         }
     }
