@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Progression;
 using TestProgression.Mock;
@@ -150,7 +149,7 @@ namespace TestProgression
         {
             var array = new[] { 1,2,3,4,5 };
             int index = 0;
-            ProgressBar.For(array, "Yo Dawg", element => {
+            ProgressBar.ForEach(array, "Yo Dawg", 30, element => {
                 Assert.AreEqual(array[index++], element);
             });
         }

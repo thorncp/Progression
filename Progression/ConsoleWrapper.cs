@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 
 namespace Progression
 {
@@ -21,7 +22,7 @@ namespace Progression
             textWriter.Write(text);
         }
 
-        public override System.Text.Encoding Encoding
+        public override Encoding Encoding
         {
             get { return textWriter.Encoding; }
         }

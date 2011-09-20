@@ -8,7 +8,7 @@ namespace Progression
     {
         private readonly ConsoleWrapper consoleWrapper;
 
-        public ProgressBar(int total, string title, int width = 30)
+        public ProgressBar(int total, string title, int width)
         {
             Total = total;
             Title = title;
@@ -49,7 +49,7 @@ namespace Progression
             double previousPercentComplete = PercentComplete;
             PercentComplete = Math.Round((double)Status / Total, 2, MidpointRounding.AwayFromZero);
 
-            // long running progress bars exhibit a flickering behaviour when printed to the console
+            // long running progress bars exhibit a flickering behavior when printed to the console
             // on every cycle. to avoid that, we only print when there is a change significant enough
             // to change text that will be printed.
             if (PercentComplete > previousPercentComplete) PrintStatus();
@@ -76,11 +76,12 @@ namespace Progression
             consoleWrapper.BypassWrite("\r".PadRight(size + 1) + "\r");
         }
 
-        public static void For<T>(IEnumerable<T> elements, string title, Action<T> action)
+        public static void ForEach<T>(IEnumerable<T> elements, string title, int width, Action<T> action)
         {
-            var progressBar = new ProgressBar(elements.Count(), title);
+            var array = elements.ToArray();
+            var progressBar = new ProgressBar(array.Length, title, width);
 
-            foreach (T element in elements)
+            foreach (T element in array)
             {
                 action(element);
                 progressBar.Bump();
