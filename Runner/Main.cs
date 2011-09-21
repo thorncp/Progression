@@ -23,7 +23,7 @@ namespace Runner
                 if (i % 100 == 0) Console.Out.WriteLine(i);
             });
 
-            // the progress bar is not thread safe, we must take extract steps when multi threading
+            // the progress bar is not thread safe, we must take extra steps when multi threading
             var threadedProgressBar = new ProgressBar(5000, "Threading, ZOMG!", 30);
             Parallel.ForEach(Enumerable.Range(0, 5000), i => {
                 Thread.Sleep(1);
