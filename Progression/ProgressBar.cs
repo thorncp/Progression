@@ -27,6 +27,8 @@ namespace Progression
             PrintStatus();
         }
 
+        // todo: none of these should be public setters. take the time to look at access throughout across the board
+
         public int Total { get; set; }
 
         public int Status { get; set; }
@@ -64,7 +66,7 @@ namespace Progression
             if (Status == Total)
             {
                 consoleWrapper.BypassWrite(" done");
-                consoleWrapper.WriteLine();
+                consoleWrapper.BypassWriteLine();
                 Console.SetOut(previousConsoleOut);
             }
         }

@@ -112,7 +112,7 @@ namespace TestProgression
         public void TestFullStatusGeneratesStatusStringRepresentingCompletedState()
         {
             progressBar.UpdateStatus(100);
-            Assert.AreEqual("Yo Dawg [==============================] 100% done", console.Text);
+            Assert.AreEqual("Yo Dawg [==============================] 100% done" + Environment.NewLine, console.Text);
         }
 
         [Test]
