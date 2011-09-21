@@ -144,9 +144,20 @@ namespace TestProgression
         [Test]
         public void TestCompletingProgressBarRelinquishesControlOfTheConsole()
         {
-            progressBar.UpdateStatus(100);
-            Assert.False(console.Flushed);
+            // flush while the progress bar is still active
             Console.Out.Flush();
+
+            // assert our flag hasn't been tripped. this means our console object isn't
+            // currently set as Console.Out
+            Assert.False(console.Flushed);
+
+            progressBar.UpdateStatus(100);
+
+            // flush after the progress bar has finished
+            Console.Out.Flush();
+
+            // this should trip our flag, showing that our console object is set
+            // as the current Console.Out
             Assert.True(console.Flushed);
         }
 
