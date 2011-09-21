@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Progression
 {
-    public class ConsoleWrapper : TextWriter
+    class ConsoleWrapper : TextWriter
     {
         private readonly TextWriter textWriter;
 
