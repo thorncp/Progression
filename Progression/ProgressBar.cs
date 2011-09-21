@@ -27,15 +27,13 @@ namespace Progression
             PrintStatus();
         }
 
-        // todo: none of these should be public setters. take the time to look at access throughout across the board
+        public int Total { get; private set; }
 
-        public int Total { get; set; }
+        public int Status { get; private set; }
 
-        public int Status { get; set; }
+        public string Title { get; private set; }
 
-        public string Title { get; set; }
-
-        public int Width { get; set; }
+        public int Width { get; private set; }
 
         public double PercentComplete { get; private set; }
 
