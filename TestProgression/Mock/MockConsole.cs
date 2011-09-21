@@ -45,6 +45,14 @@ namespace TestProgression.Mock
         {
             output.Append(Environment.NewLine);
         }
+
+        public bool Flushed { get; set; }
+
+        public override void Flush()
+        {
+            base.Flush();
+            Flushed = true;
+        }
     }
 }
 

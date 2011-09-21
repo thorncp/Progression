@@ -142,6 +142,15 @@ namespace TestProgression
         }
 
         [Test]
+        public void TestCompletingProgressBarRelinquishesControlOfTheConsole()
+        {
+            progressBar.UpdateStatus(100);
+            Assert.False(console.Flushed);
+            Console.Out.Flush();
+            Assert.True(console.Flushed);
+        }
+
+        [Test]
         public void TestForEachYieldsEachElement()
         {
             var array = new[] { 1,2,3,4,5 };

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Progression
@@ -7,12 +8,15 @@ namespace Progression
     public class ProgressBar
     {
         private readonly ConsoleWrapper consoleWrapper;
+        private readonly TextWriter previousConsoleOut;
 
         public ProgressBar(int total, string title, int width)
         {
             Total = total;
             Title = title;
             Width = width;
+
+            previousConsoleOut = Console.Out;
 
             consoleWrapper = new ConsoleWrapper(Console.Out);
             Console.SetOut(consoleWrapper);
@@ -61,6 +65,7 @@ namespace Progression
             {
                 consoleWrapper.BypassWrite(" done");
                 consoleWrapper.WriteLine();
+                Console.SetOut(previousConsoleOut);
             }
         }
 
