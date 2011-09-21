@@ -40,25 +40,22 @@ namespace TestProgression
         }
 
         [Test]
-        public void TestUpdatingStatusHigherThanTotalForcesStatusToTotal()
+        public void TestUpdatingStatusHigherThanTotalThrowsException()
         {
-            progressBar.UpdateStatus(150);
-            Assert.AreEqual(100, progressBar.Status);
+            Assert.Throws<ArgumentException>(() => progressBar.UpdateStatus(150));
         }
 
         [Test]
-        public void TestUpdatingStatusBelowZeroForcesStatusToZero()
+        public void TestUpdatingStatusBelowZeroThrowsException()
         {
-            progressBar.UpdateStatus(-50);
-            Assert.AreEqual(0, progressBar.Status);
+            Assert.Throws<ArgumentException>(() => progressBar.UpdateStatus(-50));
         }
 
         [Test]
-        public void TestBumpDoesNotUpdateStatusHigherThanTotal()
+        public void TestBumpingAfterCompleteThrowsException()
         {
             progressBar.UpdateStatus(100);
-            progressBar.Bump();
-            Assert.AreEqual(100, progressBar.Status);
+            Assert.Throws<ArgumentException>(() => progressBar.Bump());
         }
 
         [Test]
@@ -115,7 +112,7 @@ namespace TestProgression
         public void TestFullStatusGeneratesStatusStringRepresentingCompletedState()
         {
             progressBar.UpdateStatus(100);
-            Assert.AreEqual("Yo Dawg [==============================] 100%", console.Text);
+            Assert.AreEqual("Yo Dawg [==============================] 100% done", console.Text);
         }
 
         [Test]
@@ -145,7 +142,7 @@ namespace TestProgression
         }
 
         [Test]
-        public void TestForYieldsEachElement()
+        public void TestForEachYieldsEachElement()
         {
             var array = new[] { 1,2,3,4,5 };
             int index = 0;

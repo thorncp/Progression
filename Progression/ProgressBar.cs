@@ -45,6 +45,9 @@ namespace Progression
 
         public void UpdateStatus(int status)
         {
+            if (status > Total) throw new ArgumentException("Cannot update status greater than total", "status");
+            if (status < 0) throw new ArgumentException("Cannot update status less than zero", "status");
+
             Status = Math.Max(Math.Min(status, Total), 0);
             double previousPercentComplete = PercentComplete;
             PercentComplete = Math.Round((double)Status / Total, 2, MidpointRounding.AwayFromZero);
@@ -53,6 +56,12 @@ namespace Progression
             // on every cycle. to avoid that, we only print when there is a change significant enough
             // to change text that will be printed.
             if (PercentComplete > previousPercentComplete) PrintStatus();
+
+            if (Status == Total)
+            {
+                consoleWrapper.BypassWrite(" done");
+                consoleWrapper.WriteLine();
+            }
         }
 
         private string GenerateStatusString()

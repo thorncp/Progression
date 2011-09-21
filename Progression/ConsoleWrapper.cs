@@ -13,9 +13,9 @@ namespace Progression
             this.textWriter = textWriter;
         }
 
-        public event Action PreWrite;
+        public event Action PreWrite = delegate { };
 
-        public event Action PostWrite;
+        public event Action PostWrite = delegate { };
 
         public void BypassWrite(string text)
         {
@@ -31,11 +31,16 @@ namespace Progression
         // a better way to accomplish the same thing
         #region Some horrible boilerplate code
 
+        private void Wrap(Action action)
+        {
+            PreWrite();
+            action();
+            PostWrite();
+        }
+
         public override void WriteLine(string value)
         {
-            if (PreWrite != null) PreWrite();
-            textWriter.WriteLine(value);
-            if (PostWrite != null) PostWrite();
+            Wrap(() => textWriter.WriteLine(value));
         }
 
 

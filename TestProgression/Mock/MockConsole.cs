@@ -40,6 +40,11 @@ namespace TestProgression.Mock
         {
             output.Append(value + Environment.NewLine);
         }
+
+        public override void WriteLine()
+        {
+            output.Append(Environment.NewLine);
+        }
     }
 }
 
